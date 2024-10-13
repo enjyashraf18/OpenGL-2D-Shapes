@@ -95,6 +95,39 @@ void drawHouse() {
 	drawCircle(80, 50, 10, 100);
 }
 
+// windmill stand
+void windmillStand()
+{
+	glBegin(GL_QUADS);
+	glColor3f(0.69, 0.43, 0.314);
+	glVertex2i(240, 40);
+	glVertex2i(260, 40);
+	glVertex2i(255, 120);
+	glVertex2i(245, 120);
+	glEnd();
+}
+
+// windmill wings
+void windmillWings()
+{
+	//1st wing
+	glBegin(GL_QUADS);
+	glColor3f(0.4, 0.176, 0.070);
+	glVertex2i(272, 90);
+	glVertex2i(269, 104);
+	glVertex2i(229, 150);
+	glVertex2i(232, 136);
+
+	//2nd wing	
+	glColor3f(0.4, 0.176, 0.070);
+	glVertex2i(224, 90);
+	glVertex2i(274, 136);
+	glVertex2i(279, 150);
+	glVertex2i(229, 104);
+	glEnd();
+}
+
+
 // Drawing routine.
 void drawScene(void)
 {
@@ -107,6 +140,13 @@ void drawScene(void)
 
 	// Draw the house
 	drawHouse();
+
+	// Draw windmill stand
+	windmillStand();
+
+	// Draw windmill wings
+	windmillWings();
+
 
 	// Draw clouds
 	glColor3f(1.0, 1.0, 1.0); // White color
