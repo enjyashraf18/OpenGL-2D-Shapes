@@ -23,72 +23,71 @@ void drawGrass(float x, float y) {
 	glEnd();
 }
 
-void drawHouse() {
+void drawHouse(float x, float y) {
 	glColor3f(0.827, 0.663, 0.616); // House base color
 	glBegin(GL_POLYGON); // House base
-	glVertex3f(20.0, 20.0, 0.0);
-	glVertex3f(200.0, 20.0, 0.0);
-	glVertex3f(200.0, 80.0, 0.0);
-	glVertex3f(20.0, 80.0, 0.0);
+	glVertex2f(x - 90, y - 30);
+	glVertex2f(x + 90, y - 30);
+	glVertex2f(x + 90, y + 30);
+	glVertex2f(x - 90, y + 30);
 	glEnd();
 
-	glColor3f(0.094, 0.196, 0.263); // Roof color
+	glColor3f(0.094, 0.196, 0.263); // color
 	glBegin(GL_POLYGON); // Roof
-	glVertex3f(10.0, 80.0, 0.0);
-	glVertex3f(210.0, 80.0, 0.0);
-	glVertex3f(195.0, 100.0, 0.0);
-	glVertex3f(25.0, 100.0, 0.0);
+	glVertex2f(x - 100, y + 30);
+	glVertex2f(x + 100, y + 30);
+	glVertex2f(x + 85, y + 50);
+	glVertex2f(x - 85, y + 50);
 	glEnd();
 
-	glColor3f(0.973, 0.788, 0.663); // Front part of the house
+	glColor3f(0.973, 0.788, 0.663); // Front part of house
 	glBegin(GL_POLYGON);
-	glVertex3f(50.0, 20.0, 0.0);
-	glVertex3f(110.0, 20.0, 0.0);
-	glVertex3f(110.0, 80.0, 0.0);
-	glVertex3f(80.0, 110.0, 0.0);
-	glVertex3f(50.0, 80.0, 0.0);
+	glVertex2f(x - 60, y - 30);
+	glVertex2f(x, y - 30);
+	glVertex2f(x, y + 30);
+	glVertex2f(x - 30, y + 60);
+	glVertex2f(x - 60, y + 30);
 	glEnd();
 
 	glBegin(GL_POLYGON); // Chimney
-	glVertex3f(110.0, 100.0, 0.0);
-	glVertex3f(120.0, 100.0, 0.0);
-	glVertex3f(120.0, 120.0, 0.0);
-	glVertex3f(110.0, 120.0, 0.0);
+	glVertex2f(x, y + 50);
+	glVertex2f(x + 10, y + 50);
+	glVertex2f(x + 10, y + 70);
+	glVertex2f(x, y + 70);
 	glEnd();
 
 	// windows
 	glColor3f(0.0, 0.0, 0.0);
 	glBegin(GL_POLYGON);
-	glVertex3f(130.0, 40.0, 0.0);//btm lft
-	glVertex3f(150.0, 40.0, 0.0);//btn rght
-	glVertex3f(150.0, 70.0, 0.0);//top right
-	glVertex3f(130.0, 70.0, 0.0);//top left
+	glVertex2f(x + 20, y - 10);//lft
+	glVertex2f(x + 40, y - 10);//rght
+	glVertex2f(x + 40, y + 20);//right
+	glVertex2f(x + 20, y + 20);//left
 	glEnd();
 
 	glBegin(GL_POLYGON);
-	glVertex3f(170.0, 40.0, 0.0);//btm lft
-	glVertex3f(190.0, 40.0, 0.0);//btn rght
-	glVertex3f(190.0, 70.0, 0.0);//top right
-	glVertex3f(170.0, 70.0, 0.0);//top left
+	glVertex2f(x + 60, y - 10);//lft
+	glVertex2f(x + 80, y - 10);//rght
+	glVertex2f(x + 80, y + 20);//right
+	glVertex2f(x + 60, y + 20);//left
 	glEnd();
 
 	glBegin(GL_POLYGON);
-	glVertex3f(25.0, 45.0, 0.0);//btm lft
-	glVertex3f(40.0, 45.0, 0.0);//btn rght
-	glVertex3f(40.0, 65.0, 0.0);//top right
-	glVertex3f(25.0, 65.0, 0.0);//top left
+	glVertex2f(x - 85, y - 5);//lft
+	glVertex2f(x - 70, y - 5);//rght
+	glVertex2f(x - 70, y + 15);//right
+	glVertex2f(x - 85, y + 15);//left
 	glEnd();
 
-	glColor3f(0.0, 0.0, 0.0);
-	drawCircle(80, 90, 5, 100);
+	drawCircle(x - 30, y + 40, 5, 100);
 
 	glBegin(GL_POLYGON); // Door
-	glVertex3f(70.0, 20.0, 0.0);
-	glVertex3f(90.0, 20.0, 0.0);
-	glVertex3f(90.0, 50.0, 0.0);
-	glVertex3f(70.0, 50.0, 0.0);
+	glVertex2f(x - 40, y - 30);
+	glVertex2f(x - 20, y - 30);
+	glVertex2f(x - 20, y);
+	glVertex2f(x - 40, y);
 	glEnd();
-	drawCircle(80, 50, 10, 100);
+	drawCircle(x - 30, y, 10, 100);
 }
 
 void drawFruit(float x, float y) {
@@ -217,18 +216,18 @@ void drawScene(void) {
 
 
 	// Draw the house
-	drawHouse();
+	drawHouse(225, 50);
 
 	// Draw the tree
-	drawTree(400, 20); // Position the tree
-	drawTree(500, 20); // Position the tree
+	drawTree(75, 20); // Position the tree
+	drawTree(375, 20); // Position the tree
 
 	drawCloud(100, 250);
 	drawCloud(300, 280);
 	drawCloud(500, 265);
 
 	// Draw windmill 
-	windmill(280, 60);
+	windmill(525, 60);
 
 	// Execute the drawing
 	glFlush();
