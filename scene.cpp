@@ -1,3 +1,5 @@
+
+
 #include <GL/glew.h>
 #include <GL/freeglut.h> 
 #include <math.h>
@@ -16,12 +18,57 @@ void drawCircle(float cx, float cy, float r, int num_segments) {
 void drawGrass(float x, float y) {
 	glColor3f(0.0, 1.0, 0.0); // Green color
 	glBegin(GL_POLYGON);
-	glVertex3f(0.0, 0.0, 0.0);
-	glVertex3f(x, 0.0, 0.0);
+	glVertex3f(0.0, 150.0, 0.0);
+	glVertex3f(x, 150.0, 0.0);
 	glVertex3f(x, y, 0.0); // Height of the grass
 	glVertex3f(0.0, y, 0.0);
 	glEnd();
 }
+
+void drawLake(float x, float y) {
+	glColor3f(0.113, 0.635, 0.847);
+	glBegin(GL_POLYGON);
+	glVertex2f(0.0, 0.0);
+	glVertex2f(x, 0.0);
+	glVertex2f(x, y); // Height of the lake
+	glVertex2f(0.0, y);
+	glEnd();
+}
+
+void drawBoat(void)
+{
+	// trapezoid 
+	glColor3f(0.0, 0.0, 0.5);
+	glBegin(GL_POLYGON);
+	glVertex3f(0.0, 20.0, 0.0); // BL
+	glVertex3f(100.0, 20.0, 0.0); // BR
+	glVertex3f(120.0, 50.0, 0.0); // TR
+	glVertex3f(-20.0, 50.0, 0.0); // TL
+	glEnd();
+
+	// triangle
+	glColor3f(1.0, 0.0, 0.0); // red
+	glBegin(GL_TRIANGLES);
+	glVertex3f(50.0, 51.0, 0.0); // BL
+	glVertex3f(-35.0, 51.0, 0.0); // BR
+	glVertex3f(50.0, 100.0, 0.0); // Top 
+	glEnd();
+
+	// vertical lines 
+	glColor3f(0.0, 0.5, 0.0);
+	glLineWidth(5.0);
+	glBegin(GL_LINES);
+	glVertex3f(65.0, 51.0, 0.0);
+	glVertex3f(65.0, 100.0, 0.0);
+
+	glVertex3f(75.0, 51.0, 0.0); // Second bottom
+	glVertex3f(75.0, 100.0, 0.0); // Second top
+	glEnd();
+}
+
+
+
+
 
 void drawHouse(float x, float y) {
 	glColor3f(0.827, 0.663, 0.616); // House base color
@@ -208,30 +255,39 @@ void windmill(float x, float y)
 }
 
 void drawScene(void) {
-	// Clearing the buffer and setting the drawing color
+	// Clear the buffer and set the drawing color
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	// Draw the grass
-	drawGrass(600, 40);
+	// Draw the lake
+	drawLake(600, 160); // Draw the lake first
 
+	// Draw the grass
+	drawGrass(600, 200); // Move the grass up a bit
 
 	// Draw the house
-	drawHouse(225, 50);
+	drawHouse(225, 220); // Adjust position
 
 	// Draw the tree
-	drawTree(75, 20); // Position the tree
-	drawTree(375, 20); // Position the tree
+	drawTree(75, 190); // Adjust position
+	drawTree(375, 190); // Adjust position
 
-	drawCloud(100, 250);
-	drawCloud(300, 280);
-	drawCloud(500, 265);
+	drawCloud(100, 400); // Clouds stay the same
+	drawCloud(300, 430);
+	drawCloud(500, 415);
 
-	// Draw windmill 
-	windmill(525, 60);
+	// Draw windmill
+	windmill(525, 230); // Adjust position
+
+	// Draw boat
+	//glPushMatrix(); // Save current state
+	glTranslatef(280.0, 15.0, 0.0); // Adjust position of the boat on the lake
+	drawBoat(); // Draw the boat on the lake
+	//glPopMatrix(); // Restore saved state
 
 	// Execute the drawing
 	glFlush();
 }
+
 
 // Initialization routine.
 void setup(void) {
@@ -245,7 +301,7 @@ void resize(int w, int h) {
 	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0.0, 600.0, 0.0, 400.0, -1.0, 1.0);
+	glOrtho(0.0, 600.0, 0.0, 500.0, -1.0, 1.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
@@ -281,3 +337,4 @@ int main(int argc, char** argv) {
 	setup();
 	glutMainLoop();
 }
+
